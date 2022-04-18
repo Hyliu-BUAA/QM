@@ -1,0 +1,8 @@
+molecule {
+He  0   0   0
+--
+He  2   0   0
+}
+
+import snsmp2
+energy('sns-mp2')

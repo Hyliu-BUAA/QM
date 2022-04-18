@@ -1,0 +1,297 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.5 release
+
+                         Git: Rev {HEAD} e9f4d6d 
+
+
+    D. G. A. Smith, L. A. Burns, A. C. Simmonett, R. M. Parrish,
+    M. C. Schieber, R. Galvelis, P. Kraus, H. Kruse, R. Di Remigio,
+    A. Alenaizan, A. M. James, S. Lehtola, J. P. Misiewicz, M. Scheurer,
+    R. A. Shaw, J. B. Schriber, Y. Xie, Z. L. Glick, D. A. Sirianni,
+    J. S. O'Brien, J. M. Waldrop, A. Kumar, E. G. Hohenstein,
+    B. P. Pritchard, B. R. Brooks, H. F. Schaefer III, A. Yu. Sokolov,
+    K. Patkowski, A. E. DePrince III, U. Bozkaya, R. A. King,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, C. D. Sherrill,
+    J. Chem. Phys. 152(18) 184108 (2020). https://doi.org/10.1063/5.0006002
+
+                            Additional Code Authors
+    E. T. Seidl, C. L. Janssen, E. F. Valeev, M. L. Leininger,
+    J. F. Gonthier, R. M. Richard, H. R. McAlexander, M. Saitow, X. Wang,
+    P. Verma, M. H. Lechner, and A. Jiang
+
+             Previous Authors, Complete List of Code Contributors,
+                       and Citations for Specific Modules
+    https://github.com/psi4/psi4/blob/master/codemeta.json
+    https://github.com/psi4/psi4/graphs/contributors
+    http://psicode.org/psi4manual/master/introduction.html#citing-psifour
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Monday, 18 April 2022 10:31AM
+
+    Process ID: 20183
+    Host:       login
+    PSIDATADIR: /data/home/liuhanyu/anaconda3/envs/psi4/share/psi4
+    Memory:     500.0 MiB
+    Threads:    1
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+# filename: input.dat
+# Sample UHF/6-31G** CH2 computation
+
+molecule ch2 {
+    0 3
+    C
+    H 1 R
+    H 1 R 2 A
+
+    R = 1.075
+    A = 133.93
+}
+
+set basis 6-31G**
+set reference uhf
+energy('scf')--------------------------------------------------------------------------
+
+Scratch directory: /tmp/
+
+*** tstart() called on login
+*** at Mon Apr 18 10:31:46 2022
+
+   => Loading Basis Set <=
+
+    Name: 6-31G**
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1   entry C          line   115 file /data/home/liuhanyu/anaconda3/envs/psi4/share/psi4/basis/6-31gss.gbs 
+    atoms 2-3 entry H          line    44 file /data/home/liuhanyu/anaconda3/envs/psi4/share/psi4/basis/6-31gss.gbs 
+
+
+         ---------------------------------------------------------
+                                   SCF
+               by Justin Turney, Rob Parrish, Andy Simmonett
+                          and Daniel G. A. Smith
+                              UHF Reference
+                        1 Threads,    500 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: c2v
+    Full point group: C2v
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 3:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         C            0.000000000000     0.000000000000    -0.060494074040    12.000000000000
+         H            0.000000000000    -0.989285947482     0.360146287927     1.007825032230
+         H            0.000000000000     0.989285947482     0.360146287927     1.007825032230
+
+  Running in c2v symmetry.
+
+  Rotational constants: A =     55.20666  B =      8.54550  C =      7.40004 [cm^-1]
+  Rotational constants: A = 1655054.03455  B = 256187.76351  C = 221847.69716 [MHz]
+  Nuclear repulsion =    6.174548567541891
+
+  Charge       = 0
+  Multiplicity = 3
+  Electrons    = 8
+  Nalpha       = 5
+  Nbeta        = 3
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is DF.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-06
+  Density threshold  = 1.00e-06
+  Integral threshold = 1.00e-12
+
+  ==> Primary Basis <==
+
+  Basis Set: 6-31G**
+    Blend: 6-31G**
+    Number of shells: 12
+    Number of basis functions: 25
+    Number of Cartesian functions: 25
+    Spherical Harmonics?: false
+    Max angular momentum: 2
+
+   => Loading Basis Set <=
+
+    Name: (6-31G** AUX)
+    Role: JKFIT
+    Keyword: DF_BASIS_SCF
+    atoms 1   entry C          line   121 file /data/home/liuhanyu/anaconda3/envs/psi4/share/psi4/basis/cc-pvdz-jkfit.gbs 
+    atoms 2-3 entry H          line    51 file /data/home/liuhanyu/anaconda3/envs/psi4/share/psi4/basis/cc-pvdz-jkfit.gbs 
+
+  ==> Integral Setup <==
+
+  DFHelper Memory: AOs need 0.001 GiB; user supplied 0.366 GiB. Using in-core AOs.
+
+  ==> MemDFJK: Density-Fitted J/K Matrices <==
+
+    J tasked:                   Yes
+    K tasked:                   Yes
+    wK tasked:                   No
+    OpenMP threads:               1
+    Memory [MiB]:               375
+    Algorithm:                 Core
+    Schwarz Cutoff:           1E-12
+    Mask sparsity (%):       0.0000
+    Fitting Condition:        1E-10
+
+   => Auxiliary Basis Set <=
+
+  Basis Set: (6-31G** AUX)
+    Blend: CC-PVDZ-JKFIT
+    Number of shells: 42
+    Number of basis functions: 131
+    Number of Cartesian functions: 131
+    Spherical Harmonics?: false
+    Max angular momentum: 3
+
+  Minimum eigenvalue in the overlap matrix is 3.3150350411E-02.
+  Reciprocal condition number of the overlap matrix is 7.3642599886E-03.
+    Using symmetric orthogonalization.
+
+  ==> Pre-Iterations <==
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF (no occupation information).
+
+   -------------------------
+    Irrep   Nso     Nmo    
+   -------------------------
+     A1        12      12 
+     A2         2       2 
+     B1         4       4 
+     B2         7       7 
+   -------------------------
+    Total      25      25
+   -------------------------
+
+  ==> Iterations <==
+
+                           Total Energy        Delta E     RMS |[F,P]|
+
+   @DF-UHF iter SAD:   -38.17696789927969   -3.81770e+01   0.00000e+00 
+   @DF-UHF iter   1:   -38.91128821865676   -7.34320e-01   8.65808e-03 DIIS
+   @DF-UHF iter   2:   -38.92306196275323   -1.17737e-02   2.85223e-03 DIIS
+   @DF-UHF iter   3:   -38.92501204440195   -1.95008e-03   9.32153e-04 DIIS
+   @DF-UHF iter   4:   -38.92528183290088   -2.69788e-04   3.63288e-04 DIIS
+   @DF-UHF iter   5:   -38.92532926760919   -4.74347e-05   1.11787e-04 DIIS
+   @DF-UHF iter   6:   -38.92533421819969   -4.95059e-06   2.80211e-05 DIIS
+   @DF-UHF iter   7:   -38.92533459569297   -3.77493e-07   8.92243e-06 DIIS
+   @DF-UHF iter   8:   -38.92533462816861   -3.24756e-08   1.61858e-06 DIIS
+   @DF-UHF iter   9:   -38.92533462894364   -7.75024e-10   2.52789e-07 DIIS
+  Energy and wave function converged.
+
+
+  ==> Post-Iterations <==
+
+   @Spin Contamination Metric:   1.582807499E-02
+   @S^2 Expected:                2.000000000E+00
+   @S^2 Observed:                2.015828075E+00
+   @S   Expected:                1.000000000E+00
+   @S   Observed:                1.000000000E+00
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Alpha Occupied:                                                       
+
+       1A1   -11.259490     2A1    -0.946324     1B2    -0.614187  
+       3A1    -0.446641     1B1    -0.406540  
+
+    Alpha Virtual:                                                        
+
+       4A1     0.254317     2B2     0.328009     5A1     0.719487  
+       2B1     0.730066     3B2     0.777139     6A1     0.791723  
+       7A1     1.133884     4B2     1.181427     1A2     1.661409  
+       8A1     1.827809     3B1     1.850461     5B2     2.090004  
+       9A1     2.263841     4B1     2.611908     6B2     2.754764  
+      10A1     2.881238     2A2     2.945060     7B2     3.698886  
+      11A1     3.802033    12A1     4.619086  
+
+    Beta Occupied:                                                        
+
+       1A1   -11.212012     2A1    -0.771734     1B2    -0.581860  
+
+    Beta Virtual:                                                         
+
+       3A1     0.149226     1B1     0.175368     4A1     0.288419  
+       2B2     0.361742     5A1     0.805431     3B2     0.810979  
+       2B1     0.898256     6A1     0.909209     7A1     1.179674  
+       4B2     1.222763     1A2     1.746389     8A1     1.974113  
+       3B1     2.017091     5B2     2.120179     9A1     2.340498  
+       4B1     2.639687     6B2     2.791355    10A1     2.900004  
+       2A2     2.986933     7B2     3.716570    11A1     3.829397  
+      12A1     4.686615  
+
+    Final Occupation by Irrep:
+             A1    A2    B1    B2 
+    DOCC [     2,    0,    0,    1 ]
+    SOCC [     1,    0,    1,    0 ]
+
+  @DF-UHF Final Energy:   -38.92533462894364
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              6.1745485675418914
+    One-Electron Energy =                 -63.9609786997249543
+    Two-Electron Energy =                  18.8610955032394259
+    Total Energy =                        -38.9253346289436379
+
+  UHF NO Occupations:
+  HONO-2 :    2 A1 1.9940418
+  HONO-1 :    3 A1 1.0000000
+  HONO-0 :    1 B1 1.0000000
+  LUNO+0 :    4 A1 0.0059582
+  LUNO+1 :    2 B2 0.0019737
+  LUNO+2 :    5 A1 0.0000018
+  LUNO+3 :    3 B2 0.0000000
+
+
+Computation Completed
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.6753
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:    -0.4562
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.2191     Total:     0.2191
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.5568     Total:     0.5568
+
+
+*** tstop() called on login at Mon Apr 18 10:31:46 2022
+Module time:
+	user time   =       0.37 seconds =       0.01 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.37 seconds =       0.01 minutes
+	system time =       0.03 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+
+    Psi4 stopped on: Monday, 18 April 2022 10:31AM
+    Psi4 wall time for execution: 0:00:00.60
+
+*** Psi4 exiting successfully. Buy a developer a beer!

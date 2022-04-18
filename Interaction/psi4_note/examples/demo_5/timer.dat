@@ -1,0 +1,146 @@
+
+Host: login
+
+Timers On : Mon Apr 18 14:06:23 2022
+Timers Off: Mon Apr 18 14:06:29 2022
+
+Wall Time:        6.31 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+SAPT: Dimer SCF                     :      2.567u      0.117s      2.479w      1 calls
+Libint2ERI::Libint2ERI              :      0.400u      0.017s      0.509w     11 calls
+JK: (A|mn)                          :      0.300u      0.000s      0.178w      1 calls
+JK: (A|Q)^-1/2                      :      0.167u      0.033s      0.441w      1 calls
+JK: (Q|mn)                          :      0.133u      0.000s      0.076w      1 calls
+HF: Form core H                     :      0.083u      0.000s      0.060w      3 calls
+HF: Form S/X                        :      0.017u      0.000s      0.006w      3 calls
+HF: Guess                           :      0.200u      0.000s      0.120w      3 calls
+SAD Guess                           :      0.183u      0.000s      0.113w      3 calls
+HF: Form G                          :      1.483u      0.017s      0.868w     31 calls
+JK: D                               :      0.000u      0.000s      0.001w     31 calls
+JK: USO2AO                          :      0.000u      0.000s      0.000w     31 calls
+JK: JK                              :      1.483u      0.017s      0.864w     31 calls
+JK: J                               :      0.150u      0.000s      0.042w     31 calls
+JK: J1                              :      0.067u      0.000s      0.022w     31 calls
+JK: J2                              :      0.083u      0.000s      0.019w     31 calls
+JK: K                               :      1.317u      0.017s      0.815w     31 calls
+JK: K1                              :      1.133u      0.017s      0.711w     31 calls
+JK: K2                              :      0.183u      0.000s      0.103w     31 calls
+JK: AO2USO                          :      0.000u      0.000s      0.000w     31 calls
+HF: Form F                          :      0.000u      0.000s      0.001w     31 calls
+HF: Form D                          :      0.000u      0.000s      0.001w     31 calls
+HF: DIIS                            :      0.083u      0.017s      0.044w     28 calls
+DIISManager::add_entry              :      0.017u      0.000s      0.005w     28 calls
+DIISManager::extrapolate            :      0.017u      0.017s      0.010w     28 calls
+bMatrix setup                       :      0.017u      0.000s      0.005w     28 calls
+bMatrix pseudoinverse               :      0.000u      0.000s      0.001w     28 calls
+New vector                          :      0.000u      0.017s      0.004w     28 calls
+HF: Form C                          :      0.050u      0.000s      0.048w     28 calls
+SAPT: Monomer A SCF                 :      1.250u      0.033s      0.771w      1 calls
+SAPT: Monomer B SCF                 :      1.217u      0.017s      0.746w      1 calls
+SAPT0: DF Integrals                 :      0.800u      0.083s      0.531w      1 calls
+SAPT0: W Integrals                  :      0.000u      0.000s      0.002w      1 calls
+SAPT0: Elst10                       :      0.000u      0.000s      0.000w      1 calls
+SAPT0: Exch10                       :      0.000u      0.000s      0.178w      1 calls
+SAPT0: Exch10 S^2                   :      0.017u      0.000s      0.002w      1 calls
+SAPT0: Ind20                        :      0.267u      0.083s      0.217w      1 calls
+SAPT0: Exch-Ind20                   :      0.017u      0.000s      0.008w      1 calls
+SAPT0: Exch-Disp20 N^5              :      0.050u      0.033s      0.050w      1 calls
+SAPT0: Exch-Disp20 N^4              :      0.250u      0.033s      0.170w      1 calls
+
+--------------------------------------------------------------------------------------
+SAPT: Dimer SCF                     :      2.567u      0.117s      2.479w      1 calls
+| Libint2ERI::Libint2ERI            :      0.133u      0.017s      0.359w      2 calls
+| JK: (A|mn)                        :      0.300u      0.000s      0.178w      1 calls
+| JK: (A|Q)^-1/2                    :      0.167u      0.033s      0.441w      1 calls
+| | Libint2ERI::Libint2ERI          :      0.000u      0.000s      0.000w      1 calls
+| JK: (Q|mn)                        :      0.133u      0.000s      0.076w      1 calls
+| HF: Form core H                   :      0.033u      0.000s      0.025w      1 calls
+| HF: Form S/X                      :      0.000u      0.000s      0.002w      1 calls
+| HF: Guess                         :      0.083u      0.000s      0.050w      1 calls
+| | SAD Guess                       :      0.067u      0.000s      0.048w      1 calls
+| HF: Form G                        :      0.700u      0.000s      0.401w     11 calls
+| | JK: D                           :      0.000u      0.000s      0.000w     11 calls
+| | JK: USO2AO                      :      0.000u      0.000s      0.000w     11 calls
+| | JK: JK                          :      0.700u      0.000s      0.400w     11 calls
+| | | JK: J                         :      0.067u      0.000s      0.018w     11 calls
+| | | | JK: J1                      :      0.033u      0.000s      0.009w     11 calls
+| | | | JK: J2                      :      0.033u      0.000s      0.008w     11 calls
+| | | JK: K                         :      0.633u      0.000s      0.378w     11 calls
+| | | | JK: K1                      :      0.500u      0.000s      0.316w     11 calls
+| | | | JK: K2                      :      0.133u      0.000s      0.061w     11 calls
+| | JK: AO2USO                      :      0.000u      0.000s      0.000w     11 calls
+| HF: Form F                        :      0.000u      0.000s      0.000w     11 calls
+| HF: Form D                        :      0.000u      0.000s      0.000w     11 calls
+| HF: DIIS                          :      0.017u      0.000s      0.019w     10 calls
+| | DIISManager::add_entry          :      0.000u      0.000s      0.002w     10 calls
+| | DIISManager::extrapolate        :      0.000u      0.000s      0.005w     10 calls
+| | | bMatrix setup                 :      0.000u      0.000s      0.002w     10 calls
+| | | bMatrix pseudoinverse         :      0.000u      0.000s      0.000w     10 calls
+| | | New vector                    :      0.000u      0.000s      0.002w     10 calls
+| HF: Form C                        :      0.033u      0.000s      0.021w     10 calls
+SAPT: Monomer A SCF                 :      1.250u      0.033s      0.771w      1 calls
+| Libint2ERI::Libint2ERI            :      0.067u      0.000s      0.044w      2 calls
+| HF: Form core H                   :      0.033u      0.000s      0.018w      1 calls
+| HF: Form S/X                      :      0.000u      0.000s      0.002w      1 calls
+| HF: Guess                         :      0.067u      0.000s      0.036w      1 calls
+| | SAD Guess                       :      0.067u      0.000s      0.034w      1 calls
+| HF: Form G                        :      0.383u      0.000s      0.233w     10 calls
+| | JK: D                           :      0.000u      0.000s      0.000w     10 calls
+| | JK: USO2AO                      :      0.000u      0.000s      0.000w     10 calls
+| | JK: JK                          :      0.383u      0.000s      0.232w     10 calls
+| | | JK: J                         :      0.033u      0.000s      0.012w     10 calls
+| | | | JK: J1                      :      0.017u      0.000s      0.006w     10 calls
+| | | | JK: J2                      :      0.017u      0.000s      0.006w     10 calls
+| | | JK: K                         :      0.333u      0.000s      0.218w     10 calls
+| | | | JK: K1                      :      0.317u      0.000s      0.196w     10 calls
+| | | | JK: K2                      :      0.017u      0.000s      0.022w     10 calls
+| | JK: AO2USO                      :      0.000u      0.000s      0.000w     10 calls
+| HF: Form F                        :      0.000u      0.000s      0.000w     10 calls
+| HF: Form D                        :      0.000u      0.000s      0.000w     10 calls
+| HF: DIIS                          :      0.033u      0.017s      0.012w      9 calls
+| | DIISManager::add_entry          :      0.017u      0.000s      0.001w      9 calls
+| | DIISManager::extrapolate        :      0.017u      0.017s      0.003w      9 calls
+| | | bMatrix setup                 :      0.017u      0.000s      0.001w      9 calls
+| | | bMatrix pseudoinverse         :      0.000u      0.000s      0.000w      9 calls
+| | | New vector                    :      0.000u      0.017s      0.001w      9 calls
+| HF: Form C                        :      0.000u      0.000s      0.014w      9 calls
+SAPT: Monomer B SCF                 :      1.217u      0.017s      0.746w      1 calls
+| Libint2ERI::Libint2ERI            :      0.083u      0.000s      0.044w      2 calls
+| HF: Form core H                   :      0.017u      0.000s      0.018w      1 calls
+| HF: Form S/X                      :      0.017u      0.000s      0.002w      1 calls
+| HF: Guess                         :      0.050u      0.000s      0.034w      1 calls
+| | SAD Guess                       :      0.050u      0.000s      0.032w      1 calls
+| HF: Form G                        :      0.400u      0.017s      0.234w     10 calls
+| | JK: D                           :      0.000u      0.000s      0.000w     10 calls
+| | JK: USO2AO                      :      0.000u      0.000s      0.000w     10 calls
+| | JK: JK                          :      0.400u      0.017s      0.233w     10 calls
+| | | JK: J                         :      0.050u      0.000s      0.012w     10 calls
+| | | | JK: J1                      :      0.017u      0.000s      0.007w     10 calls
+| | | | JK: J2                      :      0.033u      0.000s      0.006w     10 calls
+| | | JK: K                         :      0.350u      0.017s      0.219w     10 calls
+| | | | JK: K1                      :      0.317u      0.017s      0.199w     10 calls
+| | | | JK: K2                      :      0.033u      0.000s      0.020w     10 calls
+| | JK: AO2USO                      :      0.000u      0.000s      0.000w     10 calls
+| HF: Form F                        :      0.000u      0.000s      0.000w     10 calls
+| HF: Form D                        :      0.000u      0.000s      0.000w     10 calls
+| HF: DIIS                          :      0.033u      0.000s      0.013w      9 calls
+| | DIISManager::add_entry          :      0.000u      0.000s      0.002w      9 calls
+| | DIISManager::extrapolate        :      0.000u      0.000s      0.003w      9 calls
+| | | bMatrix setup                 :      0.000u      0.000s      0.002w      9 calls
+| | | bMatrix pseudoinverse         :      0.000u      0.000s      0.000w      9 calls
+| | | New vector                    :      0.000u      0.000s      0.001w      9 calls
+| HF: Form C                        :      0.017u      0.000s      0.014w      9 calls
+SAPT0: DF Integrals                 :      0.800u      0.083s      0.531w      1 calls
+| Libint2ERI::Libint2ERI            :      0.117u      0.000s      0.062w      4 calls
+SAPT0: W Integrals                  :      0.000u      0.000s      0.002w      1 calls
+SAPT0: Elst10                       :      0.000u      0.000s      0.000w      1 calls
+SAPT0: Exch10                       :      0.000u      0.000s      0.178w      1 calls
+SAPT0: Exch10 S^2                   :      0.017u      0.000s      0.002w      1 calls
+SAPT0: Ind20                        :      0.267u      0.083s      0.217w      1 calls
+SAPT0: Exch-Ind20                   :      0.017u      0.000s      0.008w      1 calls
+SAPT0: Exch-Disp20 N^5              :      0.050u      0.033s      0.050w      1 calls
+SAPT0: Exch-Disp20 N^4              :      0.250u      0.033s      0.170w      1 calls
+
+**************************************************************************************
