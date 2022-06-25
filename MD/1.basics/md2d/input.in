@@ -1,0 +1,9 @@
+# 输入文件（可自定义）：input.in
+deltaT 0.005    # 时间步长
+density 0.8     # 流体密度
+initUcell_x 20  # 方格在 x 方向上的大小
+initUcell_y 20  # 方格在 y 轴方向上的大小
+stepAvg 100     # 用来抽样统计的步数
+stepEquil 0     # 平衡步数
+stepLimit 500   # 模拟循环数
+temperature 1.  # 温度设置
