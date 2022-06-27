@@ -2,17 +2,18 @@
  * @Author: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
  * @Date: 2022-06-24 18:28:24
  * @LastEditors: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
- * @LastEditTime: 2022-06-25 14:28:56
+ * @LastEditTime: 2022-06-25 16:00:39
  * @FilePath: /Quantum_Mechanics/MD/1.basics/code/core.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 #include "core.h"
 #include <cmath>
+#include <cstdlib>
 
 
 
 /*
-    Part II. class `Molecules`
+    Part I. class `Molecules`
 */
 // Constructor
 Molecules::Molecules(
@@ -103,9 +104,20 @@ void Molecules::InitCoords() {
 // member function -- InitVels()
 void Molecules::InitAccels() {
     real velMag = CalculateVelMag();
+
+    for (int i=0; i<num_molecules; i++) {
+        // 生成一个随机数（0 ~ 1）
+        real rvalue = (float)rand() / RAND_MAX;
+        // 生成一个随机角度（代表一个方向）
+        real theta = 2 * M_PI * rvalue;
+        real cosTheta = cos(theta);
+        real sinTheta = sin(theta);
+
+        moleculesLst[i].rv.x = velMag * cosTheta;
+        moleculesLst[i].rv.y = velMag * sinTheta;
+    }
     
 }
-
 
 
 // member function -- InitAccels()
@@ -115,4 +127,37 @@ void Molecules::InitAccels() {
         moleculesLst[i].ra.x = 0;
         moleculesLst[i].ra.y = 0;
     }
+}
+
+
+
+
+/*
+Part II. class `Property`
+*/
+Property::Property(Molecule* moleculesLst_value, int numMolecules_value) {
+    moleculesLst = 
+    numMolecules = numMolecules_value;
+}
+
+
+void Property::SetZero() {
+    // 初始化值
+    value = 0;
+    sum = 0;
+    sum2 = 0;
+}
+
+
+void Property::GetSum() {
+    // 求和与平方和
+    sum += value;
+    sum2 += pow(value, 2);
+}
+
+
+void Property::GetAverage() {
+    // 求平均值与标准差
+    average = sum / numMolecules;
+    std = sqrt( ((sum2 / numMolecules - pow(average, 2)) > 0) ? (sum2 / numMolecules) : 0 );
 }

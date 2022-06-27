@@ -1,3 +1,11 @@
+/*
+ * @Author: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
+ * @Date: 2022-06-24 18:00:57
+ * @LastEditors: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
+ * @LastEditTime: 2022-06-25 15:55:09
+ * @FilePath: /Quantum_Mechanics/MD/1.basics/md2d/core.h
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 #ifndef CORE_H
 #define CORE_H
 
@@ -84,5 +92,42 @@ public:
     // member function -- InitAccels()
     void InitAccels();
 };
+
+
+
+class Property {
+private:
+    int numMolecules;   // 体系内`分子/原子`的数目
+    real value;     // 值
+    real sum;       // 和
+    real sum2;      // 平方和
+    real average;   // 平均值
+    real std;   // 标准差standard deviaion
+
+public:
+    // Constructor 
+    Property(int);
+
+    // Set sum and sum2 to 0
+    void SetZero();
+
+    void GetSum();
+
+    void GetAverage();
+};
+
+
+
+class Properties {
+private:
+    real totEnergy;
+    real kinEnergy;
+    real pressure;
+
+public:
+    void PropZero()
+};
+
+
 
 #endif
