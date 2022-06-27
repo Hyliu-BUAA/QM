@@ -2,7 +2,7 @@
  * @Author: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
  * @Date: 2022-06-25 18:48:55
  * @LastEditors: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
- * @LastEditTime: 2022-06-27 22:05:00
+ * @LastEditTime: 2022-06-28 00:26:41
  * @FilePath: /Quantum_Mechanics/algorithm_implementation/3.Leapfrog/notes/Leapfrog.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -48,49 +48,8 @@ Note
 </font>
 
 
-# 2. Demo 1: 绘制出 $x^{''} + x = 0$ 的运动轨迹 (Python 实现)
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Solve x" = f(x) using leapfrog integrator
-
-# For this demo, x'' + x = 0
-# Exact solution is x(t) = sin(t)
-def f(x):
-    return -x
-
-num_cycles = 5                          # number of periods
-num_points_per_cyle = 16                # number of time steps per period
-h = 2*np.pi / num_points_per_cyle       # step size
-
-x = np.empty( num_cycles * num_points_per_cyle + 1 )    # positions
-v = np.empty( num_cycles * num_points_per_cyle + 1 )    # velocities
-
-# Initial conditions
-# Note: you should set the origin x and origin v carefully (according to `sin(x)` here)
-x[0] = 0
-v[0] = 1
-a_new = f(x[0])
-
-# leapfrog method
-for i in range(1, num_cycles * num_points_per_cyle + 1):
-    a_old = a_new
-    x[i] = x[i-1] + v[i-1] * h + 0.5*a_old*h**2     # 修正了位移 x 的计算公式
-    a_new = f(x[i])
-    v[i] = v[i-1] + 0.5 * (a_new + a_old) * h       # 修正了速度 v 的计算公式
-
-t = np.linspace(0, 2*np.pi*num_cycles, num_cycles * num_points_per_cyle + 1)
-plt.plot(t, x)
-plt.show()
-```
-output:
-![output_1](./pics/output_1.png)
-
-
-
-## 3. Demo 2: 绘制出 $x^{''} + x = 0$ 的运动轨迹 (Python 实现)
-### 3.1. 计算轨迹并输出
+## 2. Demo 1: 绘制出 $x^{''} + x = 0$ 的运动轨迹
+### 2.1. 计算轨迹并输出 (C++ 实现)
 ```c++
 #include <fstream>
 #include <vector>
@@ -217,5 +176,54 @@ int main() {
 
 ### 3.1.2. 绘制轨迹
 ```python
+import pandas as pd
+import matplotlib.pyplot as plt
 
+
+plt.figure(figsize=(10, 6))
+
+df = pd.read_csv("./output.csv",
+                header=None)
+df.columns = ["Time", "Location"]
+plt.plot(df.loc[:, "Time"],
+        df.loc[:, "Location"],
+        color="lightseagreen",
+        linewidth=3)
+
+
+# 1. Retouch the xlabel, ylabel
+plt.xlabel("Time", 
+            fontsize=28, 
+            fontweight="bold"
+)
+plt.ylabel("Location", 
+            fontsize=28, 
+            fontweight="bold"
+)
+
+# 2. Retouch the ticks of x-axis/y-axis
+plt.xticks(fontsize=20, 
+        fontweight="bold"
+        )
+plt.yticks(fontsize=20, 
+        fontweight="bold"
+        )
+
+# 3. title
+plt.title("num_points_per_cycle = 16",
+        fontsize=24,
+        fontweight="bold")
+
+
+
+# Save the figure
+plt.savefig("./Locations_16.png", dpi=300, bbox_inches="tight")
 ```
+Output:
+![Locations_16](../code/Locations_16.png)
+
+### 3.1.3. 时间步长对蛙跳算法效果的影响
+在上述代码中，我们通过控制 `num_points_per_cycles (每个周期内原子数目)` 控制时间步长的大小。接下来，我们分别设置 `num_points_per_cycles` = `5`, `15`, `60`，观察轨迹的变化 。
+![Compare_5_15_60](../code/compare_5_15_60.png)
+
+我们可以看出，时间步长取的越小 (每个周期取点越多)，蛙跳算法描述的轨迹越接近真实的运动轨迹。但是由于在真正的分子动力学模拟中，每一步所需的计算成本较大，不可以盲目取小的时间步长，需要每个人根据自己的研究体系具体地分析。
