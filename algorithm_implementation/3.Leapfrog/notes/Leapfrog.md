@@ -2,13 +2,15 @@
  * @Author: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
  * @Date: 2022-06-25 18:48:55
  * @LastEditors: Uper 41718895+Hyliu-BUAA@users.noreply.github.com
- * @LastEditTime: 2022-06-28 00:26:41
+ * @LastEditTime: 2022-06-28 00:44:22
  * @FilePath: /Quantum_Mechanics/algorithm_implementation/3.Leapfrog/notes/Leapfrog.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 学习网站
 -------
-https://www.compphy.com/leap-frog/
+1. https://www.compphy.com/leap-frog/
+2. https://rajeshrinet.github.io/blog/2014/ising-model/
+3. 
 
 
 # 1. `Leap-frog` algorithm (also called `Leap-frog` integration)
