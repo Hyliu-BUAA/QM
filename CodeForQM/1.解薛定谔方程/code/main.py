@@ -2,45 +2,62 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-n = 10      # The number of spaced subintervals
-h = (5 - 0) / 10    # The length of subintervals
+# 1. Get matrix A and b
+def get_A_b(num_intervals:int):
+    h = (np.pi/2 - 0) / num_intervals     # The length of subintervals
+    x_lst = np.linspace(0, np.pi/2, num_intervals+1)
+    
+    ## 1.1. Get A
+    A = np.zeros((num_intervals+1, num_intervals+1))
+    A[0, 0] = 1
+    A[num_intervals, num_intervals-1] = 2
+    A[num_intervals, num_intervals] = 4 * pow(h, 2) - 2
+    for i in range(1, num_intervals):
+        A[i, i-1] = 1
+        A[i, i] = 4 * pow(h, 2) - 2 
+        A[i, i+1] = 1
+    
+    ## 1.2. Get b
+    b = np.zeros(num_intervals + 1)
+    for i in range(1, num_intervals+1):
+        b[i] = 4 * pow(h, 2) * x_lst[i]
+    
+    return A, b
 
-# 1. Get matrix A
-A = np.zeros( (n+1, n+1) )  # 10 subintervals -> 11 points
-A[0, 0] = 1
-A[n, n] = 1
-for i in range(1, n):
-    A[i, i-1] = 1
-    A[i, i] = -2
-    A[i, i+1] = 1
-print(A)
+
+# 2. value calculated by Analytic solution
+x_target = np.pi / 2    # 计算解析解 f(x) 在 x_target 处的值
+func_value_analytic = x_target - np.sin(2*x_target)
 
 
-# 2. Get b -- row vector
-b = np.zeros(n+1)
-b[1:-1] = -9.8 * pow(h, 2)
-b[-1] = 50
-print(b)
+# 3. 
+ns_lst = []
+errors_lst = []
+for n_value in range(3, 100, 5):
+    A, b = get_A_b(n_value)
+    y = np.linalg.solve(A, b)
+    
+    ns_lst.append(n_value)
+    errors_lst.append(func_value_analytic - y[-1])
 
 
-# 3. solve the linear equations
-y_lst = np.linalg.solve(A, b)
 
 
 # 4. plot the picture
 x_lst = np.linspace(0, 5, 11)
 
 plt.figure(figsize=(10, 8))
-plt.plot(x_lst, y_lst, 
+plt.plot(ns_lst, errors_lst, 
         color="steelblue",
         linewidth=3)
-plt.scatter(5, 50, s=100, c="red")
+plt.yscale('log')   # 纵坐标变成指数坐标
+
 ## 4.1. Retouch the xlabel, ylabel
-plt.xlabel("Times (s)", 
+plt.xlabel("Number of intervals", 
             fontsize=28, 
             fontweight="bold"
 )
-plt.ylabel("Altitude (m)", 
+plt.ylabel("Errors at x=$\pi/2$", 
             fontsize=28, 
             fontweight="bold"
 )
