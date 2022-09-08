@@ -2,7 +2,7 @@
 Author       : Liu Hanyu
 Email        : hyliu2016@buaa.edu.cn
 Date         : 2022-09-07 17:41:16
-LastEditTime : 2022-09-07 17:47:33
+LastEditTime : 2022-09-07 23:03:47
 FilePath     : /Quantum_Mechanics/DFT/1D_DFT/code/test/test_selfConvergence.py
 Description  : 
 '''
