@@ -1,150 +1,88 @@
-import numpy as np 
+from scipy.optimize import minimize
+import numpy as np
+from matplotlib import cm
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
+#np.random.seed(412342)
 
-'''
-Part I. Gaussian Process Regressor Class
-'''
-class GPR(object):
-    def __init__(self, optimize:bool=True):
+class GPR:
+
+    def __init__(self, optimize=True):
         self.is_fit = False
-        self.X_train, self.y_train = None, None
-        self.params = {'l': 0.5, 'sigma_f': 0.2}
+        self.train_X, self.train_y = None, None
+        self.params = {"l": 0.5, "sigma_f": 0.2}
         self.optimize = optimize
-    
-    
-    def fit(self, X:np.array, y:np.array):
-        '''
-        Parameters
-        ----------
-            1. X: np.array (二维, 列向量形式)
-            2. y: np.array (一维)
-        '''
+
+    def fit(self, X, y):
+        # store train data
+        self.train_X = np.asarray(X)
+        self.train_y = np.asarray(y)
+
+        # hyper parameters optimization
+        def negative_log_likelihood_loss(params):
+            self.params["l"], self.params["sigma_f"] = params[0], params[1]
+            Kyy = self.kernel(self.train_X, self.train_X) + 1e-8 * np.eye(len(self.train_X))
+            loss = 0.5 * self.train_y.T.dot(np.linalg.inv(Kyy)).dot(self.train_y) + 0.5 * np.linalg.slogdet(Kyy)[1] + 0.5 * len(self.train_X) * np.log(2 * np.pi)
+            
+            #print(np.linalg.inv(Kyy))
+            #print(0.5 * self.train_y.T.dot(np.linalg.inv(Kyy)).dot(self.train_y))
+            #print(0.5 * np.linalg.slogdet(Kyy)[1])
+            #print(0.5 * len(self.train_X) * np.log(2 * np.pi))
+
+            return loss.ravel()
+
+        if self.optimize:
+            res = minimize(negative_log_likelihood_loss, [self.params["l"], self.params["sigma_f"]],
+                   bounds=((1e-4, 1e4), (1e-4, 1e4)),
+                   method='L-BFGS-B')
+            self.params["l"], self.params["sigma_f"] = res.x[0], res.x[1]
+
         self.is_fit = True
-        self.X_train = X
-        self.y_train = y
 
-    
-    def gaussian_kernel(self, x1:np.array, x2:np.array):
-        '''
-        Parameters
-        ----------
-            1. x1: np.array (二维, 列向量形式)
-            2. x2: np.array (二维, 列向量形式)
-        '''
-        print((np.sum(np.power(x1, 2), 1).reshape(-1, 1) + np.sum(np.power(x2, 2), 1).reshape(1, -1)).shape)
-        print((2 * x1.T * x2).shape)
-        ### 注意下面这一句的写法
-        dist_matrix = np.sum(np.power(x1, 2), 1).reshape(-1, 1) + \
-                    np.sum(np.power(x2, 2), 1).reshape(1, -1) - \
-                    2 * x1 * x2.T
-        return np.power(self.params["sigma_f"], 2) * np.exp(-0.5 * dist_matrix / np.power(self.params["l"], 2))
-    
-
-    def predict(self, X:np.array):
-        '''
-        Parameters
-        ----------
-            1. X: np.array (二维, 列向量形式)
-        '''
+    def predict(self, X):
         if not self.is_fit:
             print("GPR Model not fit yet.")
-            return None
-        
+            return
+
         X = np.asarray(X)
-        Kff = self.gaussian_kernel(self.X_train, self.X_train)  # (N, N)
-        Kyy = self.gaussian_kernel(X, X)                        # (k, k)
-        Kfy = self.gaussian_kernel(self.X_train, X)             # (N, k)
-        Kff_inv = np.linalg.inv(Kff)
-
-        mu = Kfy.T.dot(Kff_inv).dot(self.y_train)   # 矩阵的乘法
-        cov = Kyy - Kfy.T.dot(Kff_inv).dot(Kfy)     # 矩阵的乘法
+        Kff = self.kernel(self.train_X, self.train_X)  # (N, N)
+        Kyy = self.kernel(X, X)  # (k, k)
+        Kfy = self.kernel(self.train_X, X)  # (N, k)
+        Kff_inv = np.linalg.inv(Kff + 1e-8 * np.eye(len(self.train_X)))  # (N, N)
         
+        mu = Kfy.T.dot(Kff_inv).dot(self.train_y)
+        cov = Kyy - Kfy.T.dot(Kff_inv).dot(Kfy)
         return mu, cov
-    
 
-'''
-Part II. Get y from X
-'''
-def get_y(x, noise_sigma=0.0):
-    '''
-    Parameters
-    ----------
-        1. x: np.array (二维, 列向量形式)
+    def kernel(self, x1, x2):
+        dist_matrix = np.sum(x1**2, 1).reshape(-1, 1) + np.sum(x2**2, 1) - 2 * np.dot(x1, x2.T)
+        return self.params["sigma_f"] ** 2 * np.exp(-0.5 / self.params["l"] ** 2 * dist_matrix)
 
-    Return 
-    ------
-        1. y.ravel(): np.array (一维)
-    '''
+
+def y_2d(x, noise_sigma=0.0):
     x = np.asarray(x)
-    y = np.cos(x) + np.random.normal(0, noise_sigma, size=x.shape)
-    return y.ravel()
+    y = np.sin(0.5 * np.linalg.norm(x, axis=1))
+    y += np.random.normal(0, noise_sigma, size=y.shape)
+    return y
 
+train_X = np.random.uniform(-4, 4, (100, 2)).tolist()
+train_y = y_2d(train_X, noise_sigma=1e-4)
 
+test_d1 = np.arange(-5, 5, 0.2)
+test_d2 = np.arange(-5, 5, 0.2)
+test_d1, test_d2 = np.meshgrid(test_d1, test_d2)
+test_X = [[d1, d2] for d1, d2 in zip(test_d1.ravel(), test_d2.ravel())]
 
-'''
-Part III. Plot function
-'''
-def plot_gaussian_process(X_train:np.array,
-                        y_train:np.array,
-                        X_test:np.array,
-                        y_test:np.array,
-                        uncertainty:np.array):
-    '''
-    Parameters
-    ----------
-        1. X_train: np.array (二维，列向量形式)
-        2. y_train: np.array (二维，列向量形式)
-        3. X_test:  np.array (一维)
-        4. y_test:  np.array (一维)
-    '''
-    X_train = X_train.ravel()
-    y_train = y_train.ravel()
-    X_test = X_test.ravel()
-    y_test = y_test.ravel()
-    uncertainty = uncertainty.ravel()
+gpr = GPR(optimize=True)
+gpr.fit(train_X, train_y)
+mu, cov = gpr.predict(test_X)
+z = mu.reshape(test_d1.shape)
 
-    plt.figure(figsize=(8, 6))
-    plt.fill_between(X_test,
-                    y_test+uncertainty,
-                    y_test-uncertainty,
-                    alpha=0.1)
-    plt.plot(X_test,
-            y_test,
-            label="predict")
-    plt.scatter(X_train,
-                y_train,
-                marker='^',
-                color="red",
-                s=80,
-                zorder=2,
-                label="train")
-    plt.legend()
-
-    plt.savefig(output_png_path, dpi=300)
-
-
-'''
-Part IV. Driver code
-'''
-if __name__ == "__main__":
-    output_png_path = "/Users/mac/我的文件/Notebook/Quantum_Mechanics/algorithm_implementation/5.GaussianProcess/notes/pics/pic_2.png"
-
-    X_train = np.array([3, 1, 4, 5, 9]).reshape(-1, 1)
-    y_train = get_y(X_train, noise_sigma=0.0)
-    X_test = np.arange(0, 10, 0.1).reshape(-1, 1)
-
-    gpr = GPR()
-    gpr.fit(X_train, y_train)
-    mu, cov = gpr.predict(X_test)
-    uncertainty = 1.96 * np.sqrt( np.diag(cov) )
-    
-    y_train = y_train.ravel()
-    y_test = mu.ravel()
-
-    # 绘图
-    plot_gaussian_process(X_train=X_train,
-                        y_train=y_train,
-                        X_test=X_test,
-                        y_test=y_test,
-                        uncertainty=uncertainty)
+fig = plt.figure(figsize=(7, 5))
+ax = Axes3D(fig)
+ax.plot_surface(test_d1, test_d2, z, cmap=cm.coolwarm, linewidth=0, alpha=0.2, antialiased=False)
+ax.scatter(np.asarray(train_X)[:,0], np.asarray(train_X)[:,1], train_y, c=train_y, cmap=cm.coolwarm)
+ax.contourf(test_d1, test_d2, z, zdir='z', offset=0, cmap=cm.coolwarm, alpha=0.6)
+ax.set_title("l=%.2f sigma_f=%.2f" % (gpr.params["l"], gpr.params["sigma_f"]))
+plt.show()
