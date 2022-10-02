@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+'''
+Part I. Gaussian Process Regressor Class
+'''
 class GPR(object):
     def __init__(self, optimize:bool=True):
         self.is_fit = False
@@ -60,6 +63,9 @@ class GPR(object):
         return mu, cov
     
 
+'''
+Part II. Get y from X
+'''
 def get_y(x, noise_sigma=0.0):
     '''
     Parameters
@@ -75,6 +81,10 @@ def get_y(x, noise_sigma=0.0):
     return y.ravel()
 
 
+
+'''
+Part III. Plot function
+'''
 def plot_gaussian_process(X_train:np.array,
                         y_train:np.array,
                         X_test:np.array,
@@ -114,6 +124,9 @@ def plot_gaussian_process(X_train:np.array,
     plt.savefig(output_png_path, dpi=300)
 
 
+'''
+Part IV. Driver code
+'''
 if __name__ == "__main__":
     output_png_path = "/Users/mac/我的文件/Notebook/Quantum_Mechanics/algorithm_implementation/5.GaussianProcess/notes/pics/pic_2.png"
 
