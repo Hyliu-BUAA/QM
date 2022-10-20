@@ -2,7 +2,7 @@
 Author       : Liu Hanyu
 Email        : hyliu2016@buaa.edu.cn
 Date         : 2022-10-19 14:25:15
-LastEditTime : 2022-10-19 16:51:23
+LastEditTime : 2022-10-20 09:21:56
 FilePath     : /Quantum_Mechanics/algorithm_implementation/9.BFGS/code/bfgs.py
 Description  : 
 '''
