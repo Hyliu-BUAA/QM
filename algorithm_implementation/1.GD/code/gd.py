@@ -2,7 +2,7 @@
 Author       : Liu Hanyu
 Email        : hyliu2016@buaa.edu.cn
 Date         : 2022-09-10 11:14:27
-LastEditTime : 2022-12-27 19:13:48
+LastEditTime : 2022-12-27 19:17:29
 FilePath     : /Quantum_Mechanics/algorithm_implementation/1.GD/code/gd.py
 Description  : 
 '''
@@ -93,6 +93,8 @@ if __name__ == "__main__":
                 num_epochs=num_epochs
                 )
 
+    print(gd.theta_array)
     print(gd.cost_function(yp_array=gd.h(), y_array=y))
     print(gd.run())
+    print(gd.theta_array)
     print(gd.cost_function(yp_array=gd.h(), y_array=y))
